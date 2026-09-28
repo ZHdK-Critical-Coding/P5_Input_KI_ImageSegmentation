@@ -15,15 +15,24 @@ läuft auf WebGPU, andere Browser zeigen "This runs only on Chrome!") und
 eine Internetverbindung – transformers.js und das Modell werden beim ersten
 Start heruntergeladen.
 
-Optional, MJPEG-Stream statt Webcam: `videoSrc` und `proxyUrl` oben in
-`sketch.js` setzen und `useWebcam = false` setzen (`true`, der Standard,
-verwendet die Webcam). Der Stream wird über einen CORS-Proxy geladen, den
-man selbst bereitstellen muss (aufgerufen als `<proxyUrl><encoded videoSrc>`).
+Optional, MJPEG-Stream statt Webcam: `videoSrc` oben in `sketch.js` und
+`useWebcam = false` setzen (`true`, der Standard, verwendet die Webcam).
+Der Stream braucht einen Proxy (siehe Server).
 
 Bibliotheken (in `libraries/`): p5.js 1.10.0, p5.sound 1.0.1 (eingebunden,
 nicht verwendet), ml5.js 1.2.2, `ml5-extra-imagesegmentation.js`.
 transformers.js (Hugging Face) wird in der neusten Version von jsDelivr
 geladen.
+
+## Server
+
+Nur für den MJPEG-Stream nötig (`useWebcam = false`): `stream-proxy` aus
+[Servers_RaspberriPi](https://github.com/ZHdK-Critical-Coding/Servers_RaspberriPi)
+(HTTP, Port 5000), auf einem Raspberry Pi im selben Netzwerk wie dein
+Computer. Zuerst im Ordner mit `bash run.sh` (oder `python server.py`)
+starten. Er holt den Kamerastream und reicht ihn mit CORS-Headern weiter,
+damit das Modell seine Pixel lesen kann. In `sketch.js` `proxyUrl` auf
+`http://<pi-ip>:5000/stream?url=` setzen.
 
 ## Ausführen
 
