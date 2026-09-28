@@ -8,13 +8,15 @@ const videoSrc = 'http://153.169.104.107:8080/?action=stream';
 // Proxy server to bypass CORS issues when loading the MJPEG stream
 const proxyUrl = 'http://10.21.19.158:5000/stream?url='; 
 
-const useWebcam = false
+// true: use the webcam, false: use the MJPEG stream (videoSrc via proxyUrl)
+const useWebcam = true
 
 let videoReady = false; // Tracks if the video stream is ready
 let imageStream;        // Will hold the MJPEG <img> element
 let segmentation;       // ml5.js segmentation model
 let results;            // Segmentation results from the model
 let frame;              // Off-screen graphics buffer to capture frames
+let captureBtn;         // Button to start a segmentation
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -24,17 +26,18 @@ function setup() {
   const proxy = `${proxyUrl}${encodeURIComponent(videoSrc)}`;
   console.log(proxy);
 
-  // Create the HTML <img> element that streams MJPEG video
   if (useWebcam) {
-    imageStream = createImg(proxy, '', 'anonymous', (e) => {
-      imageStream.hide();   // Hide original element, we draw it manually on canvas
-      videoReady = true;    // Mark as ready when loaded
-    });
-  } else {
+    // Use the webcam
     imageStream = createCapture(VIDEO);
     imageStream.size(640, 480);
     imageStream.hide();
     videoReady = true;    // Mark as ready when loaded
+  } else {
+    // Create the HTML <img> element that streams MJPEG video
+    imageStream = createImg(proxy, '', 'anonymous', (e) => {
+      imageStream.hide();   // Hide original element, we draw it manually on canvas
+      videoReady = true;    // Mark as ready when loaded
+    });
   }
 
   // Create a button to trigger segmentation on demand

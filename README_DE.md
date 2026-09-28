@@ -15,22 +15,23 @@ läuft auf WebGPU, andere Browser zeigen "This runs only on Chrome!") und
 eine Internetverbindung – transformers.js und das Modell werden beim ersten
 Start heruntergeladen.
 
-1. Den Ordner in Visual Studio Code öffnen und Live Server starten (in der
-   Statusleiste auf **Go Live** klicken).
-2. Den Zugriff auf die Webcam erlauben.
-3. Warten, bis das Modell geladen ist (siehe Konsole, beim ersten Mal wird
-   es von Hugging Face heruntergeladen), dann auf **capture** klicken.
-
 Optional, MJPEG-Stream statt Webcam: `videoSrc` und `proxyUrl` oben in
-`sketch.js` setzen und `useWebcam = true` setzen. Achtung, die Logik ist
-verkehrt: `true` lädt den Stream, `false` (Standard) verwendet die Webcam.
-Der Stream wird über einen CORS-Proxy geladen, den man selbst
-bereitstellen muss (aufgerufen als `<proxyUrl><encoded videoSrc>`).
+`sketch.js` setzen und `useWebcam = false` setzen (`true`, der Standard,
+verwendet die Webcam). Der Stream wird über einen CORS-Proxy geladen, den
+man selbst bereitstellen muss (aufgerufen als `<proxyUrl><encoded videoSrc>`).
 
 Bibliotheken (in `libraries/`): p5.js 1.10.0, p5.sound 1.0.1 (eingebunden,
 nicht verwendet), ml5.js 1.2.2, `ml5-extra-imagesegmentation.js`.
 transformers.js (Hugging Face) wird in der neusten Version von jsDelivr
 geladen.
+
+## Ausführen
+
+1. Den Ordner in Visual Studio Code öffnen und Live Server starten (in der
+   Statusleiste auf **Go Live** klicken).
+2. Den Zugriff auf die Webcam erlauben.
+3. Warten, bis das Modell geladen ist (siehe Konsole, beim ersten Mal wird
+   es von Hugging Face heruntergeladen), dann auf **capture** klicken.
 
 ## Coding-Hilfe
 

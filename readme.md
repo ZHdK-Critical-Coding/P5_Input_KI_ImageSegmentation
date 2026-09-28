@@ -13,21 +13,22 @@ Requirements: a webcam (or an MJPEG stream), Chrome (the model runs on
 WebGPU, other browsers show "This runs only on Chrome!") and an internet
 connection – transformers.js and the model are downloaded on first start.
 
+Optional, MJPEG stream instead of webcam: set `videoSrc` and `proxyUrl` at
+the top of `sketch.js` and set `useWebcam = false` (`true`, the default,
+uses the webcam). The stream is loaded through a CORS proxy server that you
+need to provide yourself (called as `<proxyUrl><encoded videoSrc>`).
+
+Libraries (in `libraries/`): p5.js 1.10.0, p5.sound 1.0.1 (included, not
+used), ml5.js 1.2.2, `ml5-extra-imagesegmentation.js`. transformers.js
+(Hugging Face) is loaded in its latest version from jsDelivr.
+
+## How to Run
+
 1. Open the folder in Visual Studio Code and start Live Server (click
    **Go Live** in the status bar).
 2. Allow webcam access.
 3. Wait until the model has loaded (see console, the first load downloads it
    from Hugging Face), then press **capture**.
-
-Optional, MJPEG stream instead of webcam: set `videoSrc` and `proxyUrl` at
-the top of `sketch.js` and set `useWebcam = true`. Note that the flag is
-inverted: `true` loads the stream, `false` (default) uses the webcam. The
-stream is loaded through a CORS proxy server that you need to provide
-yourself (called as `<proxyUrl><encoded videoSrc>`).
-
-Libraries (in `libraries/`): p5.js 1.10.0, p5.sound 1.0.1 (included, not
-used), ml5.js 1.2.2, `ml5-extra-imagesegmentation.js`. transformers.js
-(Hugging Face) is loaded in its latest version from jsDelivr.
 
 ## Coding Help
 
